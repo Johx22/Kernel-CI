@@ -31,3 +31,9 @@ jobs:
             export ARCH=arm64
             make exynos7570-j4lte_defconfig
             make -j18
+
+       - name: Upload Image.gz
+         uses: actions/upload-artifact@v3
+         with:
+          name: Image
+          path: /home/runner/work/Kernel-CI/Kernel-CI/kernel/source/arch/arm64/boot/*.gz

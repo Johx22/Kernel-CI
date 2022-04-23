@@ -1,4 +1,4 @@
-name: Check specs
+name: Kernel Builder Samsung-J4
 
 on:
   watch:
@@ -12,7 +12,25 @@ jobs:
        - name: Checkout
          uses: actions/checkout@master
 
-       - name: Check specs
+       - name: Initialize environment
          run: |
-            sudo apt install neofetch
-            neofetch
+            sudo apt-get Update
+            sudo apt-get install -y build-essential kernel-package libncurses5-dev bzip2 git
+            echo -e "\nCheck GCC ..."
+            gcc
+            echo -e "\nCheck MAKE ..."
+            make
+
+       - name: Clone kernel source and compiler
+         run: |
+            mkdir kernel
+            cd kernel
+            git clone https://github.com/synt4x93/android_kernel_samsung_universal7570 source
+            git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.1 toolchain
+
+       - name: Compile KERNEL
+         run: |
+            export cross_compile=/home/runner/work/Kernel-CI/Kernel-CI/kernel/toolchain/bin/aarch64-linux-android-
+            export ARCH=arm64
+            make exynos7570_j4lte-defconfig
+            make -j18

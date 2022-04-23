@@ -27,7 +27,7 @@ jobs:
        - name: Compile KERNEL
          run: |
             cd kernel/source
-            export cross_compile=/home/runner/work/Kernel-CI/Kernel-CI/kernel/toolchain/bin/aarch64-linux-android-
+            export CROSS_COMPILE=/home/runner/work/Kernel-CI/Kernel-CI/kernel/toolchain/bin/aarch64-linux-android-
             export ARCH=arm64
             make exynos7570-j4lte_defconfig
             make -j18

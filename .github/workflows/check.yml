@@ -1,4 +1,4 @@
-name: Building recovery
+name: Check specs
 
 on:
   watch:
